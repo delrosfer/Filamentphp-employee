@@ -322,7 +322,7 @@ return [
         //'shi-Tfng'    => ['name' => 'Tachelhit (Tifinagh)',   'script' => 'Tfng', 'native' => 'ⵜⴰⵎⴰⵣⵉⵖⵜ', 'flag_code' => '' ],
         //'tzm'         => ['name' => 'Central Atlas Tamazight (Tifinagh)','script' => 'Tfng', 'native' => 'ⵜⴰⵎⴰⵣⵉⵖⵜ', 'flag_code' => '' ],
         //'yue'         => ['name' => 'Yue',                    'script' => 'Hant', 'native' => '廣州話', 'flag_code' => '' ],
-        //'ja'          => ['name' => 'Japanese',               'script' => 'Jpan', 'native' => '日本語', 'flag_code' => '' ],
+        'ja'          => ['name' => 'Japanese',               'script' => 'Jpan', 'native' => '日本語', 'flag_code' => '' ],
         //'zh'          => ['name' => 'Chinese (Simplified)',   'script' => 'Hans', 'native' => '简体中文', 'flag_code' => '' ],
         //'zh-Hant'     => ['name' => 'Chinese (Traditional)',  'script' => 'Hant', 'native' => '繁體中文', 'flag_code' => '' ],
         //'ii'          => ['name' => 'Sichuan Yi',             'script' => 'Yiii', 'native' => 'ꆈꌠꉙ', 'flag_code' => '' ],

@@ -2,8 +2,10 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\CountryResource\RelationManagers\EmployeesRelationManager;
 use App\Filament\Resources\StateResource\Pages;
 use App\Filament\Resources\StateResource\RelationManagers;
+use App\Filament\Resources\StateResource\RelationManagers\CitiesRelationManager;
 use App\Models\State;
 use Filament\Forms;
 use Filament\Forms\Components\Card;
@@ -20,9 +22,9 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class StateResource extends Resource
 {
     protected static ?string $model = State::class;
-
+    protected static ?string $navigationLabel = 'Estados';
     protected static ?string $navigationIcon = 'heroicon-o-office-building';
-    protected static ?string $navigationGroup = 'System Management';
+    protected static ?string $navigationGroup = 'Administración del sistema';
 
     public static function form(Form $form): Form
     {
@@ -63,7 +65,8 @@ class StateResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\EmployeesRelationManager::class,
+            RelationManagers\CitiesRelationManager::class,
         ];
     }
     

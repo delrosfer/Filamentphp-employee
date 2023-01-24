@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\CityResource\Pages;
 use App\Filament\Resources\CityResource\RelationManagers;
+use App\Filament\Resources\CityResource\RelationManagers\EmployeesRelationManager;
 use App\Models\City;
 use Filament\Forms;
 use Filament\Forms\Components\Card;
@@ -20,9 +21,9 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class CityResource extends Resource
 {
     protected static ?string $model = City::class;
-
+    protected static ?string $navigationLabel = 'Ciudades';
     protected static ?string $navigationIcon = 'heroicon-o-office-building';
-    protected static ?string $navigationGroup = 'System Management';
+    protected static ?string $navigationGroup = 'Administración del sistema';
     protected static ?int $navigationSort = 2;
 
     public static function form(Form $form): Form
@@ -64,7 +65,7 @@ class CityResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\EmployeesRelationManager::class,
         ];
     }
     

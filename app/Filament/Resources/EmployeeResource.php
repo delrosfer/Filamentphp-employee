@@ -4,11 +4,12 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\EmployeeResource\Pages;
 use App\Filament\Resources\EmployeeResource\RelationManagers;
-use App\Models\Employee;
-use App\Models\Country;
-use App\Models\State;
+use App\Filament\Resources\EmployeeResource\Widgets\EmployeeStatsOverview;
 use App\Models\City;
+use App\Models\Country;
 use App\Models\Department;
+use App\Models\Employee;
+use App\Models\State;
 use Filament\Forms;
 use Filament\Forms\Components\Card;
 use Filament\Forms\Components\DatePicker;
@@ -27,7 +28,7 @@ use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
 class EmployeeResource extends Resource
 {
     protected static ?string $model = Employee::class;
-
+    protected static ?string $navigationLabel = 'Empleados';
     protected static ?string $navigationIcon = 'heroicon-o-briefcase';
 
     public static function form(Form $form): Form
@@ -70,12 +71,12 @@ class EmployeeResource extends Resource
                         
 
                     Select::make('department_id')
-                        ->relationship('department', 'name')->required()->maxLength(200),
+                        ->relationship('department', 'name')->required(),
                     TextInput::make('first_name')->required()->maxLength(200),
                     TextInput::make('last_name')->required()->maxLength(200),
                     TextInput::make('address')->required()->maxLength(200),
-                    TextInput::make('phone_number')->required()->maxLength(200),
-                    TextInput::make('zip_code')->required()->maxLength(200),
+                    TextInput::make('phone_number')->required()->maxLength(10),
+                    TextInput::make('zip_code')->required()->maxLength(5),
                     DatePicker::make('birth_date')->required(),
                     DatePicker::make('date_hired')->required()
                 ])
@@ -86,13 +87,16 @@ class EmployeeResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('id')->sortable(),
-                TextColumn::make('first_name')->sortable()->searchable(),
-                TextColumn::make('last_name')->sortable()->searchable(),
-                TextColumn::make('department.name')->sortable(),
-                TextColumn::make('phone_number')->sortable()->searchable(),
-                TextColumn::make('date_hired')->dateTime(),
-                TextColumn::make('birth_date')->dateTime()
+                TextColumn::make('id')->sortable()->toggleable(),
+                TextColumn::make('first_name')->sortable()->searchable()->toggleable(),
+                TextColumn::make('last_name')->sortable()->searchable()->toggleable(),
+                TextColumn::make('state.name')->sortable()->toggleable(),
+                TextColumn::make('department.name')->sortable()->toggleable(),
+                TextColumn::make('phone_number')->sortable()->searchable()->toggleable(isToggledHiddenByDefault : true),
+                TextColumn::make('date_hired')->dateTime()->toggleable(isToggledHiddenByDefault : true),
+                TextColumn::make('birth_date')->dateTime()->toggleable(),
+                TextColumn::make('created_at')->dateTime()->toggleable(),
+                TextColumn::make('updated_at')->dateTime()->toggleable(isToggledHiddenByDefault : true)
             ])
             ->filters([
                 SelectFilter::make('department')->relationship('department', 'name')
@@ -110,6 +114,13 @@ class EmployeeResource extends Resource
     {
         return [
             //
+        ];
+    }
+
+    public static function getWidgets(): array
+    {
+        return [
+            EmployeeStatsOverview::class,
         ];
     }
     

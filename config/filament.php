@@ -1,5 +1,6 @@
 <?php
 
+use App\Filament\Resources\EmployeeResource\Widgets\EmployeeStatsOverview;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Http\Middleware\MirrorConfigToSubpackages;
@@ -25,7 +26,7 @@ return [
     |
     */
 
-    'path' => env('FILAMENT_PATH', 'admin'),
+    'path' => env('FILAMENT_PATH', 'silver'),
 
     /*
     |--------------------------------------------------------------------------
@@ -141,6 +142,7 @@ return [
         'register' => [
             Widgets\AccountWidget::class,
             Widgets\FilamentInfoWidget::class,
+            EmployeeStatsOverview::class,
         ],
     ],
 
