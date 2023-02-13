@@ -17,6 +17,7 @@ use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Hash;
+use Filament\Forms\Components\Select;
 
 class UserResource extends Resource
 {
@@ -48,7 +49,13 @@ class UserResource extends Resource
                     ->label('Pasword confirmation')
                     ->required(fn (Page $livewire): bool => $livewire instanceof CreateRecord)
                     ->minLength(8)
-                    ->dehydrated(false)
+                    ->dehydrated(false),
+                Select::make('roles')
+                    ->multiple()
+                    ->relationship('roles', 'name')->preload(),
+                Select::make('permissions')
+                    ->multiple()
+                    ->relationship('permissions', 'name')->preload()
             ]);
     }
 
@@ -59,7 +66,7 @@ class UserResource extends Resource
                 TextColumn::make('id')->sortable(),
                 TextColumn::make('name')->sortable()->searchable(),
                 TextColumn::make('email')->sortable()->searchable(),
-                TextColumn::make('created_at')->dateTime()
+                TextColumn::make('created_at')->dateTime('d-M-Y')
             ])
             ->filters([
                 //

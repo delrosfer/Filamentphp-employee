@@ -32,7 +32,7 @@ class PermissionResource extends Resource
                     TextInput::make('name')
                     ->required()
                     ->maxLength(200)
-                    ->unique()
+                    ->unique(ignoreRecord: true)
                 ])
             ]);
     }
@@ -43,13 +43,14 @@ class PermissionResource extends Resource
             ->columns([
                 TextColumn::make('id')->sortable(),
                 TextColumn::make('name')->sortable()->searchable(),
-                TextColumn::make('created_at')->dateTime()
+                TextColumn::make('created_at')->dateTime('d-M-Y')
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

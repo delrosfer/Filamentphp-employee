@@ -15,6 +15,7 @@ use Filament\Tables;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Forms\Components\Select;
 
 class RoleResource extends Resource
 {
@@ -32,6 +33,8 @@ class RoleResource extends Resource
                     TextInput::make('name')
                     ->required()
                     ->maxLength(200)
+                    ->unique(ignoreRecord: true),
+                
                 ])
             ]);
     }
@@ -49,6 +52,7 @@ class RoleResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                 Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
@@ -69,5 +73,10 @@ class RoleResource extends Resource
             'create' => Pages\CreateRole::route('/create'),
             'edit' => Pages\EditRole::route('/{record}/edit'),
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->where('name', '!=', 'Administrador');
     }    
 }
