@@ -47,15 +47,27 @@ class CountryResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('id')->sortable(),
-                TextColumn::make('country_code')->sortable()->searchable(),
-                TextColumn::make('name')->sortable()->searchable(),
-                TextColumn::make('created_at')->dateTime()
+                TextColumn::make('country_code')->sortable()->searchable()
+                ->fontFamily('mono')
+                ->color('primary')
+                ->weight('thin'),
+                TextColumn::make('name')->sortable()->searchable()
+                ->fontFamily('sans')
+                ->color('warning')
+                ->size('sm')
+                ->weight('bold'),
+                TextColumn::make('created_at')->since()
+                ->fontFamily('serif')
+                ->color('danger')
+                ->size('lg')
+                ->weight('black')
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),

@@ -2,10 +2,11 @@
 
 namespace App\Policies;
 
+use App\Models\Country;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class UserPolicy
+class CountryPolicy
 {
     use HandlesAuthorization;
 
@@ -24,10 +25,10 @@ class UserPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\Country  $country
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, User $model)
+    public function view(User $user, Country $country)
     {
         //
     }
@@ -47,22 +48,22 @@ class UserPolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\Country  $country
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user)
+    public function update(User $user, Country $country)
     {
-        return $user->hasRole(['Empleado','Administrador','Becario']);
+        return $user->hasRole(['Empleado','Administrador', 'Becario']);
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\Country  $country
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user)
+    public function delete(User $user, Country $country)
     {
         return $user->hasRole(['Empleado','Administrador']);
     }
@@ -71,10 +72,10 @@ class UserPolicy
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\Country  $country
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, User $model)
+    public function restore(User $user, Country $country)
     {
         //
     }
@@ -83,10 +84,10 @@ class UserPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\User  $model
+     * @param  \App\Models\Country  $country
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, User $model)
+    public function forceDelete(User $user, Country $country)
     {
         //
     }
