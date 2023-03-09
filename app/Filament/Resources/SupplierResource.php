@@ -56,19 +56,20 @@ class SupplierResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('id')->sortable(),
-                TextColumn::make('name')->sortable()->searchable(),
-                TextColumn::make('image'),
-                TextColumn::make('phone')->sortable()->searchable(),
-                TextColumn::make('contract'),
-                TextColumn::make('created_at')->since()
+                TextColumn::make('id')->sortable()->label('Identificador'),
+                TextColumn::make('name')->sortable()->searchable()->label('Nombre del Proveedor'),
+                TextColumn::make('image')->label('Imagen'),
+                TextColumn::make('phone')->sortable()->searchable()->label('Telefono'),
+                TextColumn::make('contract')->label('Contrato'),
+                TextColumn::make('created_at')->since()->label('Fecha de Alta')
 
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->label('Editar Proveedor'),
+                Tables\Actions\DeleteAction::make()->label('Eliminar Proveedor'),
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
